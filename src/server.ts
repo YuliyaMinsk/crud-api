@@ -1,26 +1,35 @@
-import 'dotenv/config';
 import http from 'http';
+
+import 'dotenv/config';
+import getRequest from './getRequest';
+import postRequest from './postRequest';
+import putRequest from './putRequest';
+import deleteRequest from './deleteRequest';
 
 function startServer() {
   const host = 'localhost';
   const port = Number(process.env.SERVER_PORT);
 
-  const requestListener = function (request: http.IncomingMessage, response: http.ServerResponse) {
+  const requestListener = (request: http.IncomingMessage, response: http.ServerResponse) => {
 
     response.setHeader('Content-Type', 'application/json')
 
     if (request.url?.includes('/api/users')) {
       switch (request.method) {
         case 'GET': {
+          getRequest(request, response);
           break;
         }
         case 'POST': {
+          postRequest(request, response);
           break;
         }
         case 'PUT': {
+          putRequest(request, response);
           break;
         }
         case 'DELETE': {
+          deleteRequest(request, response);
           break;
         }
         default: {
