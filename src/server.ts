@@ -55,6 +55,8 @@ function startServer() {
   server.listen(port, host, () => {
     console.log(`Server is running on 🚀 http://${host}:${port}`);
   });
+
+  return server;
 }
 
-startServer();
+export default startServer;
