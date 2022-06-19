@@ -7,7 +7,7 @@
     "allowJs": true,
     "target": "ES6",
     "module": "Node16",
-    "moduleResolution": "Node",
+    "moduleResolution": "Node"
   },
   "include": ["src/**/*", "server.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
