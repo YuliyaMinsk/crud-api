@@ -28,7 +28,7 @@ function startServer() {
             break;
           }
           case 'PUT': {
-            putRequest(request, response);
+            putRequest(request, response, userDB);
             break;
           }
           case 'DELETE': {
