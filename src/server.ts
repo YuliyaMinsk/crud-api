@@ -5,43 +5,50 @@ import getRequest from './getRequest';
 import postRequest from './postRequest';
 import putRequest from './putRequest';
 import deleteRequest from './deleteRequest';
+import User from './user';
 
 function startServer() {
   const host = 'localhost';
   const port = Number(process.env.SERVER_PORT);
 
+  const userDB: User[] = []; // in-memory database
+
   const requestListener = (request: http.IncomingMessage, response: http.ServerResponse) => {
+    try {
+      response.setHeader('Content-Type', 'application/json');
 
-    response.setHeader('Content-Type', 'application/json')
-
-    if (request.url?.includes('/api/users')) {
-      switch (request.method) {
-        case 'GET': {
-          getRequest(request, response);
-          break;
+      if (request.url?.includes('/api/users')) {
+        switch (request.method) {
+          case 'GET': {
+            getRequest(request, response, userDB);
+            break;
+          }
+          case 'POST': {
+            postRequest(request, response, userDB);
+            break;
+          }
+          case 'PUT': {
+            putRequest(request, response);
+            break;
+          }
+          case 'DELETE': {
+            deleteRequest(request, response);
+            break;
+          }
+          default: {
+            response.writeHead(501);
+            response.end('The server does not support the request method');
+          }
         }
-        case 'POST': {
-          postRequest(request, response);
-          break;
-        }
-        case 'PUT': {
-          putRequest(request, response);
-          break;
-        }
-        case 'DELETE': {
-          deleteRequest(request, response);
-          break;
-        }
-        default: {
-          response.writeHead(501);
-          response.end('The server does not support the request method');
-        }
+      } else {
+        response.writeHead(404);
+        response.end('The route do not found');
       }
-    } else {
-      response.writeHead(404);
-      response.end('The route do not found');
+    } catch {
+      response.writeHead(500);
+      response.end('Server error. Try again!');
     }
-  }
+  };
 
   const server = http.createServer(requestListener);
 
