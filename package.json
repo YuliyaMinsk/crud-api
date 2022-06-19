@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "ts-node ./src/server.ts",
+    "start:dev": "nodemon ./src/server.ts",
     "start:prod": "npx webpack && node ./dist/bundle.js"
   },
   "repository": {
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
+    "nodemon": "^2.0.16",
     "uuid": "^8.3.2"
   }
 }

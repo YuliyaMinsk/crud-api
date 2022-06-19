@@ -12,18 +12,20 @@ function postRequest(request: http.IncomingMessage, response: http.ServerRespons
   });
 
   request.on('end', () => {
-    const newUser = validateUser(body);
-    if (newUser) {
-      response.writeHead(201);
+    let newUser = validateUser(body);
 
+    if (newUser) {
+      newUser.id = v4();
       userDB.push({
-        id: v4(),
+        id: newUser.id,
         username: newUser.username,
         age: newUser.age,
         hobbies: newUser.hobbies
       });
 
-      response.end(JSON.stringify(userDB));
+      response.writeHead(201);
+      response.end(JSON.stringify(newUser));
+
       return true;
     } else {
       response.writeHead(400);

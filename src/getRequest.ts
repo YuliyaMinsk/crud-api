@@ -1,6 +1,7 @@
 import http from 'http';
-import findUser from './findUser';
+import { validate } from 'uuid';
 
+import findUser from './findUser';
 import User from './user';
 
 function getRequest(request: http.IncomingMessage, response: http.ServerResponse, userDB: User[]) {
@@ -14,6 +15,13 @@ function getRequest(request: http.IncomingMessage, response: http.ServerResponse
   // return one user
   if (request.url.includes('/api/users/')) {
     const idToFind = request.url.slice('/api/users/'.length);
+
+    if (!validate(idToFind)) {
+      response.writeHead(400);
+      response.end('User id is invalid');
+      return false;
+    }
+
     const userFound = findUser(idToFind, userDB);
 
     if (userFound) {
@@ -23,7 +31,7 @@ function getRequest(request: http.IncomingMessage, response: http.ServerResponse
     }
   }
 
-  response.writeHead(400);
+  response.writeHead(404);
   response.end('User with this id does not exist');
   return false;
 }
