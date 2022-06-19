@@ -1,4 +1,4 @@
-import User from './user';
+import User from '../user';
 
 function findUser(idToFind: string, userDB: User[]) {
   const userFound = userDB.find((user) => user.id === idToFind);

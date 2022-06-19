@@ -1,8 +1,8 @@
 import http from 'http';
 import { v4 } from 'uuid';
 
-import User from './user';
-import validateUser from './validateUser';
+import User from '../user';
+import validateUser from '../utils/validateUser';
 
 function postRequest(request: http.IncomingMessage, response: http.ServerResponse, userDB: User[]) {
   let body = '';

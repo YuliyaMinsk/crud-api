@@ -1,15 +1,15 @@
 import http from 'http';
 
-import User from "./user";
+import User from '../user';
 
 function putRequest(request: http.IncomingMessage, response: http.ServerResponse) {
-  let body = "";
+  let body = '';
 
-  request.on("data", (chunk) => {
+  request.on('data', (chunk) => {
     body += chunk;
   });
 
-  request.on("end", () => {
+  request.on('end', () => {
     response.end(body);
   });
 }

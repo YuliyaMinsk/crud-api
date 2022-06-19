@@ -1,10 +1,10 @@
 import http from 'http';
 
 import 'dotenv/config';
-import getRequest from './getRequest';
-import postRequest from './postRequest';
-import putRequest from './putRequest';
-import deleteRequest from './deleteRequest';
+import getRequest from './requests/getRequest';
+import postRequest from './requests/postRequest';
+import putRequest from './requests/putRequest';
+import deleteRequest from './requests/deleteRequest';
 import User from './user';
 
 function startServer() {
@@ -32,7 +32,7 @@ function startServer() {
             break;
           }
           case 'DELETE': {
-            deleteRequest(request, response);
+            deleteRequest(request, response, userDB);
             break;
           }
           default: {

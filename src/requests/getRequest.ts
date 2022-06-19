@@ -1,8 +1,8 @@
 import http from 'http';
 import { validate } from 'uuid';
 
-import findUser from './findUser';
-import User from './user';
+import findUser from '../utils/findUser';
+import User from '../user';
 
 function getRequest(request: http.IncomingMessage, response: http.ServerResponse, userDB: User[]) {
   // return all users
