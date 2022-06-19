@@ -30,7 +30,7 @@ function putRequest(request: http.IncomingMessage, response: http.ServerResponse
         return false;
       }
 
-      let newUserData = validateUser(body);
+      let newUserData = JSON.parse(body);
 
       if (newUserData.username) {
         userDB[index].username = newUserData.username;

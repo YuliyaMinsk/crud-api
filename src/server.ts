@@ -56,6 +56,10 @@ function startServer() {
     console.log(`Server is running on 🚀 http://${host}:${port}`);
   });
 
+  server.on('connection', (socket) => {
+    // console.log(`Worker ${process.pid} got a connection`);
+  });
+
   return server;
 }
 
