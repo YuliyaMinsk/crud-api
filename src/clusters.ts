@@ -5,7 +5,6 @@ import startServer from './server';
 import User from './user';
 
 const numCPUs = cpus().length;
-// const userDB: User[] = []; // in-memory database
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);

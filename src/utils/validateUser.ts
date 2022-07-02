@@ -3,8 +3,11 @@ function validateUser(data: string) {
 
   if (
     userToCheck.hasOwnProperty('username') &&
+    typeof userToCheck.username === 'string' &&
     userToCheck.hasOwnProperty('age') &&
-    userToCheck.hasOwnProperty('hobbies')
+    typeof userToCheck.age === 'number' &&
+    userToCheck.hasOwnProperty('hobbies') &&
+    Array.isArray(userToCheck.hobbies)
   ) {
     return userToCheck;
   }

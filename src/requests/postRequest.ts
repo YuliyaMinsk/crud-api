@@ -29,7 +29,7 @@ function postRequest(request: http.IncomingMessage, response: http.ServerRespons
       return true;
     } else {
       response.writeHead(400);
-      response.end('The required fields for the new user are not specified');
+      response.end('The required fields for the new user are not specified or wrong type');
       return false;
     }
   });
